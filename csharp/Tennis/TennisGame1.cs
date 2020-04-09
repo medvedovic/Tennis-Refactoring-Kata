@@ -2,8 +2,8 @@ namespace Tennis
 {
     struct CurrentScore
     {
-        int playerOneScore;
-        int playerTwoScore;
+        public int playerOneScore;
+        public int playerTwoScore;
     }
     internal interface ITennisGameStateContext
     {
