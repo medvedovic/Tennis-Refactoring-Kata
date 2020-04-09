@@ -68,6 +68,37 @@ namespace Tennis
         public void WonPoint(CurrentScore score)
         {
             // no-op now
+            if (score.playerOneScore >= 4 || score.playerTwoScore >= 4)
+            {
+                _context.SetState(new AdvantageOrWinState(_context));
+            }
+        }
+    }
+
+    internal class AdvantageOrWinState : ITennisGameState
+    {
+        private readonly ITennisGameStateContext _context;
+
+        public AdvantageOrWinState(ITennisGameStateContext context)
+        {
+            _context = context;
+        }
+
+        public string GetScore(CurrentScore score)
+        {
+            var currentScoreDiff = score.playerOneScore - score.playerTwoScore;
+            if (currentScoreDiff == 1) return "Advantage player1";
+            else if (currentScoreDiff == -1) return "Advantage player2";
+            else if (currentScoreDiff >= 2) return "Win for player1";
+            else return "Win for player2";
+        }
+
+        public void WonPoint(CurrentScore score)
+        {
+            if (score.playerOneScore == score.playerTwoScore)
+            {
+                _context.SetState(new DeuceState(_context));
+            }
         }
     }
 
@@ -106,11 +137,7 @@ namespace Tennis
             }
             else if (m_score1 >= 4 || m_score2 >= 4)
             {
-                var minusResult = m_score1 - m_score2;
-                if (minusResult == 1) score = "Advantage player1";
-                else if (minusResult == -1) score = "Advantage player2";
-                else if (minusResult >= 2) score = "Win for player1";
-                else score = "Win for player2";
+                return _context.GetScore(new CurrentScore { playerOneScore = m_score1, playerTwoScore = m_score2 });
             }
             else
             {
