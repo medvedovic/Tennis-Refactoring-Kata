@@ -9,11 +9,15 @@ namespace Tennis
     {
         ITennisGameStateContext SetState(ITennisGameState newState);
         void WonPoint(CurrentScore score);
+        string GetScore();
     }
 
     internal class TennisGameStateContext : ITennisGameStateContext
     {
         private ITennisGameState _state;
+
+        public string GetScore() => _state.GetScore();
+
         public ITennisGameStateContext SetState(ITennisGameState newState)
         {
             _state = newState;
@@ -28,6 +32,7 @@ namespace Tennis
     interface ITennisGameState
     {
         void WonPoint(CurrentScore score);
+        string GetScore();
     }
 
     class TennisGame1 : ITennisGame
