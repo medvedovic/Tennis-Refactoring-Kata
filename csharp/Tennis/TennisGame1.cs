@@ -71,6 +71,10 @@ namespace Tennis
             {
                 _context.SetState(new AdvantageOrWinState(_context));
             }
+            else if (score.playerOneScore != score.playerTwoScore)
+            {
+                _context.SetState(new PlayerLeadsState(_context));
+            }
         }
     }
 
@@ -101,6 +105,56 @@ namespace Tennis
         }
     }
 
+    internal class PlayerLeadsState : ITennisGameState
+    {
+        private readonly ITennisGameStateContext _context;
+
+        public PlayerLeadsState(ITennisGameStateContext context)
+        {
+            _context = context;
+        }
+
+        public string GetScore(CurrentScore score)
+        {
+            var outputScore = "";
+            var tempScore = 0;
+            for (var i = 1; i < 3; i++)
+            {
+                if (i == 1) tempScore = score.playerOneScore;
+                else { outputScore += "-"; tempScore = score.playerTwoScore; }
+                switch (tempScore)
+                {
+                    case 0:
+                        outputScore += "Love";
+                        break;
+                    case 1:
+                        outputScore += "Fifteen";
+                        break;
+                    case 2:
+                        outputScore += "Thirty";
+                        break;
+                    case 3:
+                        outputScore += "Forty";
+                        break;
+                }
+            }
+
+            return outputScore;
+        }
+
+        public void WonPoint(CurrentScore score)
+        {
+            if (score.playerOneScore == score.playerTwoScore)
+            {
+                _context.SetState(new DeuceState(_context));
+            }
+            else if(score.playerOneScore >= 4 || score.playerTwoScore >= 4)
+            {
+                _context.SetState(new AdvantageOrWinState(_context));
+            }
+        }
+    }
+
     class TennisGame1 : ITennisGame
     {
         private int m_score1 = 0;
@@ -127,42 +181,7 @@ namespace Tennis
         }
 
         public string GetScore()
-        {
-            string score = "";
-            var tempScore = 0;
-            if (m_score1 == m_score2)
-            {
-                return _context.GetScore(new CurrentScore { playerOneScore = m_score1, playerTwoScore = m_score2 });
-            }
-            else if (m_score1 >= 4 || m_score2 >= 4)
-            {
-                return _context.GetScore(new CurrentScore { playerOneScore = m_score1, playerTwoScore = m_score2 });
-            }
-            else
-            {
-                for (var i = 1; i < 3; i++)
-                {
-                    if (i == 1) tempScore = m_score1;
-                    else { score += "-"; tempScore = m_score2; }
-                    switch (tempScore)
-                    {
-                        case 0:
-                            score += "Love";
-                            break;
-                        case 1:
-                            score += "Fifteen";
-                            break;
-                        case 2:
-                            score += "Thirty";
-                            break;
-                        case 3:
-                            score += "Forty";
-                            break;
-                    }
-                }
-            }
-            return score;
-        }
+            => _context.GetScore(new CurrentScore { playerOneScore = m_score1, playerTwoScore = m_score2 });
     }
 }
 
