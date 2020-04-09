@@ -1,5 +1,35 @@
 namespace Tennis
 {
+    struct CurrentScore
+    {
+        int playerOneScore;
+        int playerTwoScore;
+    }
+    internal interface ITennisGameStateContext
+    {
+        ITennisGameStateContext SetState(ITennisGameState newState);
+        void WonPoint(CurrentScore score);
+    }
+
+    internal class TennisGameStateContext : ITennisGameStateContext
+    {
+        private ITennisGameState _state;
+        public ITennisGameStateContext SetState(ITennisGameState newState)
+        {
+            _state = newState;
+            return this;
+        }
+        public void WonPoint(CurrentScore score)
+        {
+            _state.WonPoint(score);
+        }
+    }
+
+    interface ITennisGameState
+    {
+        void WonPoint(CurrentScore score);
+    }
+
     class TennisGame1 : ITennisGame
     {
         private int m_score1 = 0;
