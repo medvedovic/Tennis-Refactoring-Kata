@@ -16,6 +16,11 @@ namespace Tennis
     {
         private ITennisGameState _state;
 
+        public TennisGameStateContext()
+        {
+            _state = new DeuceState();
+        }
+
         public string GetScore(CurrentScore score) => _state.GetScore(score);
 
         public ITennisGameStateContext SetState(ITennisGameState newState)
@@ -33,6 +38,30 @@ namespace Tennis
     {
         void WonPoint(CurrentScore score);
         string GetScore(CurrentScore score);
+    }
+
+    internal class DeuceState : ITennisGameState
+    {
+        public string GetScore(CurrentScore score)
+        {
+            // no need to check both values here
+            switch (score.playerOneScore)
+            {
+                case 0:
+                    return "Love-All";
+                case 1:
+                    return "Fifteen-All";
+                case 2:
+                    return "Thirty-All";
+                default:
+                    return "Deuce";
+            }
+        }
+
+        public void WonPoint(CurrentScore score)
+        {
+            // no-op now
+        }
     }
 
     class TennisGame1 : ITennisGame
@@ -56,6 +85,8 @@ namespace Tennis
                 m_score1 += 1;
             else
                 m_score2 += 1;
+            // mind the order
+            _context.WonPoint(new CurrentScore { playerOneScore = m_score1, playerTwoScore = m_score2 });
         }
 
         public string GetScore()
@@ -64,22 +95,7 @@ namespace Tennis
             var tempScore = 0;
             if (m_score1 == m_score2)
             {
-                switch (m_score1)
-                {
-                    case 0:
-                        score = "Love-All";
-                        break;
-                    case 1:
-                        score = "Fifteen-All";
-                        break;
-                    case 2:
-                        score = "Thirty-All";
-                        break;
-                    default:
-                        score = "Deuce";
-                        break;
-
-                }
+                return _context.GetScore(new CurrentScore { playerOneScore = m_score1, playerTwoScore = m_score2 });
             }
             else if (m_score1 >= 4 || m_score2 >= 4)
             {
