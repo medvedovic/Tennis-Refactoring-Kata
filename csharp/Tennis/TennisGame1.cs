@@ -18,7 +18,7 @@ namespace Tennis
 
         public TennisGameStateContext()
         {
-            _state = new DeuceState();
+            _state = new DeuceState(this);
         }
 
         public string GetScore(CurrentScore score) => _state.GetScore(score);
@@ -42,6 +42,13 @@ namespace Tennis
 
     internal class DeuceState : ITennisGameState
     {
+        private readonly ITennisGameStateContext _context;
+
+        public DeuceState(ITennisGameStateContext context)
+        {
+            _context = context;
+        }
+
         public string GetScore(CurrentScore score)
         {
             // no need to check both values here
