@@ -36,11 +36,13 @@ namespace Tennis
         private int m_score2 = 0;
         private string player1Name;
         private string player2Name;
+        private readonly ITennisGameStateContext _context;
 
         public TennisGame1(string player1Name, string player2Name)
         {
             this.player1Name = player1Name;
             this.player2Name = player2Name;
+            _context = new TennisGameStateContext();
         }
 
         public void WonPoint(string playerName)
