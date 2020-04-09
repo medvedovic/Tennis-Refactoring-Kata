@@ -67,7 +67,6 @@ namespace Tennis
 
         public void WonPoint(CurrentScore score)
         {
-            // no-op now
             if (score.playerOneScore >= 4 || score.playerTwoScore >= 4)
             {
                 _context.SetState(new AdvantageOrWinState(_context));
