@@ -93,12 +93,7 @@ namespace Tennis
         }
 
         public string GetScore(CurrentScore score)
-        {
-            if (Math.Sign(score.GetScoreDifference()) > 0)
-                return "Win for player1";
-            else
-                return "Win for player2";
-        }
+            => Math.Sign(score.GetScoreDifference()) > 0 ? "Win for player1" : "Win for player2";
 
         public void WonPoint(CurrentScore score)
         {
@@ -116,12 +111,7 @@ namespace Tennis
         }
 
         public string GetScore(CurrentScore score)
-        {
-            if (Math.Sign(score.GetScoreDifference()) > 0)
-                return "Advantage player1";
-            else
-                return "Advantage player2";
-        }
+            => Math.Sign(score.GetScoreDifference()) > 0 ? "Advantage player1" : "Advantage player2";
 
         public void WonPoint(CurrentScore score)
         {
