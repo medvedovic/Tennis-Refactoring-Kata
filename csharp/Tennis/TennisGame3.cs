@@ -18,10 +18,7 @@ namespace Tennis
         {
             string s;
             if ((p1 < 4 && p2 < 4) && (p1 + p2 < 6))
-            {
-                s = indexedTextualScore[p1];
-                return (p1 == p2) ? s + "-All" : s + "-" + indexedTextualScore[p2];
-            }
+                return (p1 == p2) ? $"{indexedTextualScore[p1]}-All" : $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
             else
             {
                 if (p1 == p2)
