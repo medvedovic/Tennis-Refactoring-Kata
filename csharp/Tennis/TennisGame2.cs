@@ -1,3 +1,5 @@
+using System;
+
 namespace Tennis
 {
     public class TennisGame2 : ITennisGame
@@ -20,7 +22,7 @@ namespace Tennis
         public string GetScore()
         {
             var score = "";
-            if (p1point == p2point)         
+            if (p1point == p2point)
                 return GetStringRepresentationForSameScore(p1point);
 
             if (p1point > 0 && p2point == 0)
@@ -96,16 +98,29 @@ namespace Tennis
 
         private string GetStringRepresentationForSameScore(int currentScore)
         {
-            switch(currentScore)
+            switch (currentScore)
             {
                 case 0:
-                    return "Love-All";
                 case 1:
-                    return "Fifteen-All";
                 case 2:
-                    return "Thirty-All";
+                    return $"{ConvertScoreLessThanThreeToString(currentScore)}-All";
                 default:
                     return "Deuce";
+            }
+        }
+
+        private string ConvertScoreLessThanThreeToString(int score)
+        {
+            switch (score)
+            {
+                case 0:
+                    return "Love";
+                case 1:
+                    return "Fifteen";
+                case 2:
+                    return "Thirty";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(score), "Encountered invalid value for conversion");
             }
         }
 
