@@ -22,11 +22,10 @@ namespace Tennis
             if ((p1 < 4 && p2 < 4) && (p1 + p2 < 6))
                 return $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
             else
-            {
-                string s = p1 > p2 ? p1N : p2N;
-                return ((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
-            }
+                return ((p1 - p2) * (p1 - p2) == 1) ? $"Advantage {GetLeadingPlayerName()}" : $"Win for {GetLeadingPlayerName()}";
         }
+
+        private string GetLeadingPlayerName() => p1 > p2 ? p1N : p2N;
 
         private bool IsDeuce() => p1 >= 3 && p2 >= 3;
 
