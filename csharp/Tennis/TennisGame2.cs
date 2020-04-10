@@ -22,6 +22,9 @@ namespace Tennis
         public string GetScore()
         {
             var score = "";
+            if (HasOnePlayerReachedAtLeastFourPoints() && IsScoreDifferenceAtLeastTwoPoints())
+                return Math.Sign(p1point - p2point) > 0 ? "Win for player1" : "Win for player2";
+
             if (p1point == p2point)
                 return GetStringRepresentationForSameScore(p1point);
 
@@ -84,9 +87,6 @@ namespace Tennis
             {
                 score = "Advantage player2";
             }
-
-            if (HasOnePlayerReachedAtLeastFourPoints() && IsScoreDifferenceAtLeastTwoPoints())
-                return Math.Sign(p1point - p2point) > 0 ? "Win for player1" : "Win for player2";
 
             return score;
         }
