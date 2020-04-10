@@ -119,7 +119,7 @@ namespace Tennis
             {
                 _context.SetState(new DeuceState(_context));
             }
-            if (Math.Abs(score.GetScoreDifference()) >= 2)
+            else if (Math.Abs(score.GetScoreDifference()) >= 2)
             {
                 _context.SetState(new WinState(_context));
             }
