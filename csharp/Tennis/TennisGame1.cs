@@ -1,3 +1,5 @@
+using System;
+
 namespace Tennis
 {
     struct CurrentScore
@@ -115,32 +117,7 @@ namespace Tennis
         }
 
         public string GetScore(CurrentScore score)
-        {
-            var outputScore = "";
-            var tempScore = 0;
-            for (var i = 1; i < 3; i++)
-            {
-                if (i == 1) tempScore = score.playerOneScore;
-                else { outputScore += "-"; tempScore = score.playerTwoScore; }
-                switch (tempScore)
-                {
-                    case 0:
-                        outputScore += "Love";
-                        break;
-                    case 1:
-                        outputScore += "Fifteen";
-                        break;
-                    case 2:
-                        outputScore += "Thirty";
-                        break;
-                    case 3:
-                        outputScore += "Forty";
-                        break;
-                }
-            }
-
-            return outputScore;
-        }
+            => $"{ConvertScoreToStringRepresentation(score.playerOneScore)}-{ConvertScoreToStringRepresentation(score.playerTwoScore)}";
 
         public void WonPoint(CurrentScore score)
         {
@@ -148,9 +125,26 @@ namespace Tennis
             {
                 _context.SetState(new DeuceState(_context));
             }
-            else if(score.playerOneScore >= 4 || score.playerTwoScore >= 4)
+            else if (score.playerOneScore >= 4 || score.playerTwoScore >= 4)
             {
                 _context.SetState(new AdvantageOrWinState(_context));
+            }
+        }
+
+        private string ConvertScoreToStringRepresentation(int score)
+        {
+            switch (score)
+            {
+                case 0:
+                    return "Love";
+                case 1:
+                    return "Fifteen";
+                case 2:
+                    return "Thirty";
+                case 3:
+                    return "Forty";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(score), "Encountered value is not valid for conversion");
             }
         }
     }
