@@ -6,6 +6,8 @@ namespace Tennis
     {
         public int playerOneScore;
         public int playerTwoScore;
+
+        public bool IsSame() => playerOneScore == playerTwoScore;
     }
     internal interface ITennisGameStateContext
     {
@@ -73,7 +75,7 @@ namespace Tennis
             {
                 _context.SetState(new AdvantageState(_context));
             }
-            else if (score.playerOneScore != score.playerTwoScore)
+            else if (!score.IsSame())
             {
                 _context.SetState(new PlayerLeadsState(_context));
             }
@@ -123,7 +125,7 @@ namespace Tennis
 
         public void WonPoint(CurrentScore score)
         {
-            if (score.playerOneScore == score.playerTwoScore)
+            if (score.IsSame())
             {
                 _context.SetState(new DeuceState(_context));
             }
@@ -148,7 +150,7 @@ namespace Tennis
 
         public void WonPoint(CurrentScore score)
         {
-            if (score.playerOneScore == score.playerTwoScore)
+            if (score.IsSame())
             {
                 _context.SetState(new DeuceState(_context));
             }
