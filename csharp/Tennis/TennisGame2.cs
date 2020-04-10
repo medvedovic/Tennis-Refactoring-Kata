@@ -27,11 +27,14 @@ namespace Tennis
             if (HasOnePlayerAdvantage())
                 return Math.Sign(p1point - p2point) > 0 ? "Advantage player1" : "Advantage player2";
 
-            if (p1point == p2point)
+            if (IsScoreSame())
                 return GetStringRepresentationForSameScore(p1point);
-         
+
             return GetScoreForLeadingPlayer();
         }
+
+        private bool IsScoreSame()
+            => p1point == p2point;
 
         private string GetScoreForLeadingPlayer()
             => $"{ConvertScoreToString(p1point)}-{ConvertScoreToString(p2point)}";
