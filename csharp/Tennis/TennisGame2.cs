@@ -97,17 +97,7 @@ namespace Tennis
         }
 
         private string GetStringRepresentationForSameScore(int currentScore)
-        {
-            switch (currentScore)
-            {
-                case 0:
-                case 1:
-                case 2:
-                    return $"{ConvertScoreLessThanThreeToString(currentScore)}-All";
-                default:
-                    return "Deuce";
-            }
-        }
+            => currentScore > 2 ? "Deuce" : $"{ConvertScoreLessThanThreeToString(currentScore)}-All";
 
         private string ConvertScoreLessThanThreeToString(int score)
         {
