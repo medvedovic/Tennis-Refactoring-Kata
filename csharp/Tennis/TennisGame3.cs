@@ -20,10 +20,12 @@ namespace Tennis
                 return IsDeuce() ? "Deuce" : $"{indexedTextualScore[p1]}-All";
 
             if (HasAnyPlayerReachedFourPoints())
-                return ((p1 - p2) * (p1 - p2) == 1) ? $"Advantage {GetLeadingPlayerName()}" : $"Win for {GetLeadingPlayerName()}";
+                return (GetCurrentScoreDifference() * GetCurrentScoreDifference() == 1) ? $"Advantage {GetLeadingPlayerName()}" : $"Win for {GetLeadingPlayerName()}";
             else
                 return $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
         }
+
+        private int GetCurrentScoreDifference() => p1 - p2;
 
         private bool HasAnyPlayerReachedFourPoints() => p1 >= 4 || p2 >= 4;
 
