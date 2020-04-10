@@ -18,7 +18,7 @@ namespace Tennis
         {
             string s;
             if (IsCurrentScoreSame())
-                return p1 >= 3 ? "Deuce" : $"{indexedTextualScore[p1]}-All";
+                return IsDeuce() ? "Deuce" : $"{indexedTextualScore[p1]}-All";
 
             if ((p1 < 4 && p2 < 4) && (p1 + p2 < 6))
                 return $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
@@ -28,6 +28,8 @@ namespace Tennis
                 return ((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
             }
         }
+
+        private bool IsDeuce() => p1 >= 3 && p2 >= 3;
 
         private bool IsCurrentScoreSame() => p1 == p2;
 
