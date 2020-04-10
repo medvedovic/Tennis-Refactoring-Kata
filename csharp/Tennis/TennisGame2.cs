@@ -78,15 +78,8 @@ namespace Tennis
                 score = p1res + "-" + p2res;
             }
 
-            if (p1point > p2point && p2point >= 3)
-            {
-                score = "Advantage player1";
-            }
-
-            if (p2point > p1point && p1point >= 3)
-            {
-                score = "Advantage player2";
-            }
+            if (p1point > p2point && p2point >= 3 || p2point > p1point && p1point >= 3)
+                return Math.Sign(p1point - p2point) > 0 ? "Advantage player1" : "Advantage player2";
 
             return score;
         }
