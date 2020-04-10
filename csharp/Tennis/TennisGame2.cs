@@ -7,8 +7,8 @@ namespace Tennis
         private int p1point;
         private int p2point;
 
-        private string player1Name;
-        private string player2Name;
+        private readonly string player1Name;
+        private readonly string player2Name;
 
         public TennisGame2(string player1Name, string player2Name)
         {
