@@ -8,8 +8,8 @@ namespace Tennis
     {
         private int m_score1 = 0;
         private int m_score2 = 0;
-        private string player1Name;
-        private string player2Name;
+        private readonly string player1Name;
+        private readonly string player2Name;
         private readonly ITennisGameStateContext _context;
 
         public TennisGame1(string player1Name, string player2Name)
