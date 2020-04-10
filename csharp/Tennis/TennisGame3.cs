@@ -6,6 +6,7 @@ namespace Tennis
         private int p1;
         private string p1N;
         private string p2N;
+        private static readonly string[] indexedTextualScore = { "Love", "Fifteen", "Thirty", "Forty" };
 
         public TennisGame3(string player1Name, string player2Name)
         {
@@ -18,9 +19,8 @@ namespace Tennis
             string s;
             if ((p1 < 4 && p2 < 4) && (p1 + p2 < 6))
             {
-                string[] p = { "Love", "Fifteen", "Thirty", "Forty" };
-                s = p[p1];
-                return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
+                s = indexedTextualScore[p1];
+                return (p1 == p2) ? s + "-All" : s + "-" + indexedTextualScore[p2];
             }
             else
             {
