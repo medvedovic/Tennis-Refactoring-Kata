@@ -60,7 +60,7 @@ namespace Tennis
                 return p1res + "-" + p2res;
             }
 
-            if (p1point > p2point && p1point < 4)
+            if (p1point > p2point)
             {
                 if (p1point == 2)
                     p1res = "Thirty";
@@ -72,7 +72,7 @@ namespace Tennis
                     p2res = "Thirty";
                 return p1res + "-" + p2res;
             }
-            if (p2point > p1point && p2point < 4)
+            if (p2point > p1point)
             {
                 if (p2point == 2)
                     p2res = "Thirty";
