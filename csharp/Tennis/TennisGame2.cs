@@ -51,7 +51,7 @@ namespace Tennis
                     p2res = "Thirty";
                 return p1res + "-" + p2res;
             }
-            if (p2point > p1point)
+            else
             {
                 if (p2point == 1)
                     p2res = "Fifteen";
@@ -67,8 +67,6 @@ namespace Tennis
                     p1res = "Thirty";
                 return p1res + "-" + p2res;
             }
-
-            throw new Exception("Invalid score state encountered");
         }
 
         private bool HasOnePlayerAdvantage()
