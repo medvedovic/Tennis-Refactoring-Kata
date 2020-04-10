@@ -19,11 +19,13 @@ namespace Tennis
             if (IsCurrentScoreSame())
                 return IsDeuce() ? "Deuce" : $"{indexedTextualScore[p1]}-All";
 
-            if (p1 >= 4 || p2 >= 4)
+            if (HasAnyPlayerReachedFourPoints())
                 return ((p1 - p2) * (p1 - p2) == 1) ? $"Advantage {GetLeadingPlayerName()}" : $"Win for {GetLeadingPlayerName()}";
             else
                 return $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
         }
+
+        private bool HasAnyPlayerReachedFourPoints() => p1 >= 4 || p2 >= 4;
 
         private string GetLeadingPlayerName() => p1 > p2 ? p1N : p2N;
 
