@@ -1,3 +1,5 @@
+using System;
+
 namespace Tennis
 {
     public class TennisGame3 : ITennisGame
@@ -20,7 +22,9 @@ namespace Tennis
                 return IsDeuce() ? "Deuce" : $"{indexedTextualScore[p1]}-All";
 
             if (HasAnyPlayerReachedFourPoints())
-                return (GetCurrentScoreDifference() * GetCurrentScoreDifference() == 1) ? $"Advantage {GetLeadingPlayerName()}" : $"Win for {GetLeadingPlayerName()}";
+                return Math.Abs(GetCurrentScoreDifference()) == 1 
+                    ? $"Advantage {GetLeadingPlayerName()}"
+                    : $"Win for {GetLeadingPlayerName()}";
             else
                 return $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
         }
