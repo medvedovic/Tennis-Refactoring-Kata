@@ -21,13 +21,15 @@ namespace Tennis
             if (IsCurrentScoreSame())
                 return IsDeuce() ? "Deuce" : $"{indexedTextualScore[p1]}-All";
 
-            if (HasAnyPlayerReachedFourPoints())
-                return Math.Abs(GetCurrentScoreDifference()) == 1 
-                    ? $"Advantage {GetLeadingPlayerName()}"
-                    : $"Win for {GetLeadingPlayerName()}";
-            else
-                return $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
+            return HasAnyPlayerReachedFourPoints()
+                ? GetTextualScoreForAdvantageOrWin()
+                : $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
         }
+
+        private string GetTextualScoreForAdvantageOrWin()
+            => Math.Abs(GetCurrentScoreDifference()) == 1
+            ? $"Advantage {GetLeadingPlayerName()}"
+            : $"Win for {GetLeadingPlayerName()}";
 
         private int GetCurrentScoreDifference() => p1 - p2;
 
