@@ -34,22 +34,7 @@ namespace Tennis
         }
 
         private string GetScoreForLeadingPlayer()
-        {
-            if (p1point > p2point)
-            {
-                p1res = ConvertScoreToString(p1point);
-                p2res = ConvertScoreToString(p2point);
-
-                return p1res + "-" + p2res;
-            }
-            else
-            {
-                p1res = ConvertScoreToString(p1point);
-                p2res = ConvertScoreToString(p2point);
-
-                return p1res + "-" + p2res;
-            }
-        }
+            => $"{ConvertScoreToString(p1point)}-{ConvertScoreToString(p2point)}";
 
         private bool HasOnePlayerAdvantage()
             => (p1point > p2point && p2point >= 3) || (p2point > p1point && p1point >= 3);
