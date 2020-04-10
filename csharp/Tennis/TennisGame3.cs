@@ -27,7 +27,7 @@ namespace Tennis
 
         private string GetLeadingPlayerName() => p1 > p2 ? p1N : p2N;
 
-        private bool IsDeuce() => p1 >= 3 && p2 >= 3;
+        private bool IsDeuce() => p1 >= 3 && p2 >= 3 && IsCurrentScoreSame();
 
         private bool IsCurrentScoreSame() => p1 == p2;
 
