@@ -37,34 +37,16 @@ namespace Tennis
         {
             if (p1point > p2point)
             {
-                if (p1point == 1)
-                    p1res = "Fifteen";
-                if (p1point == 2)
-                    p1res = "Thirty";
-                if (p1point == 3)
-                    p1res = "Forty";
-                if (p2point == 0)
-                    p2res = "Love";
-                if (p2point == 1)
-                    p2res = "Fifteen";
-                if (p2point == 2)
-                    p2res = "Thirty";
+                p1res = ConvertScoreToString(p1point);
+                p2res = ConvertScoreToString(p2point);
+
                 return p1res + "-" + p2res;
             }
             else
             {
-                if (p2point == 1)
-                    p2res = "Fifteen";
-                if (p2point == 2)
-                    p2res = "Thirty";
-                if (p2point == 3)
-                    p2res = "Forty";
-                if (p1point == 0)
-                    p1res = "Love";
-                if (p1point == 1)
-                    p1res = "Fifteen";
-                if (p1point == 2)
-                    p1res = "Thirty";
+                p1res = ConvertScoreToString(p1point);
+                p2res = ConvertScoreToString(p2point);
+
                 return p1res + "-" + p2res;
             }
         }
@@ -79,9 +61,9 @@ namespace Tennis
             => Math.Abs(p2point - p1point) >= 2;
 
         private string GetStringRepresentationForSameScore(int currentScore)
-            => currentScore > 2 ? "Deuce" : $"{ConvertScoreLessThanThreeToString(currentScore)}-All";
+            => currentScore > 2 ? "Deuce" : $"{ConvertScoreToString(currentScore)}-All";
 
-        private string ConvertScoreLessThanThreeToString(int score)
+        private string ConvertScoreToString(int score)
         {
             switch (score)
             {
@@ -91,6 +73,8 @@ namespace Tennis
                     return "Fifteen";
                 case 2:
                     return "Thirty";
+                case 3:
+                    return "Forty";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(score), "Encountered invalid value for conversion");
             }
