@@ -3,14 +3,9 @@ using Tennis.TennisGame1Files.Contracts;
 
 namespace Tennis.TennisGame1Files.States
 {
-    internal class AdvantageState : ITennisGameState
+    internal class AdvantageState : TennisGameStateBase, ITennisGameState
     {
-        private readonly ITennisGameStateContext _context;
-
-        public AdvantageState(ITennisGameStateContext context)
-        {
-            _context = context;
-        }
+        public AdvantageState(ITennisGameStateContext context) : base(context) { }
 
         public string GetScore(CurrentScore score)
             => Math.Sign(score.GetScoreDifference()) > 0 ? "Advantage player1" : "Advantage player2";

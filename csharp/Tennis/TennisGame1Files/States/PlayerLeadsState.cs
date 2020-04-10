@@ -3,14 +3,9 @@ using Tennis.TennisGame1Files.Contracts;
 
 namespace Tennis.TennisGame1Files.States
 {
-    internal class PlayerLeadsState : ITennisGameState
+    internal class PlayerLeadsState : TennisGameStateBase, ITennisGameState
     {
-        private readonly ITennisGameStateContext _context;
-
-        public PlayerLeadsState(ITennisGameStateContext context)
-        {
-            _context = context;
-        }
+        public PlayerLeadsState(ITennisGameStateContext context): base(context) { }
 
         public string GetScore(CurrentScore score)
             => $"{ConvertScoreToStringRepresentation(score.playerOneScore)}-{ConvertScoreToStringRepresentation(score.playerTwoScore)}";

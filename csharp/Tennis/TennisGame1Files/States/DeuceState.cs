@@ -2,14 +2,9 @@
 
 namespace Tennis.TennisGame1Files.States
 {
-    internal class DeuceState : ITennisGameState
+    internal class DeuceState : TennisGameStateBase, ITennisGameState
     {
-        private readonly ITennisGameStateContext _context;
-
-        public DeuceState(ITennisGameStateContext context)
-        {
-            _context = context;
-        }
+        public DeuceState(ITennisGameStateContext context): base(context) { }
 
         public string GetScore(CurrentScore score)
         {
