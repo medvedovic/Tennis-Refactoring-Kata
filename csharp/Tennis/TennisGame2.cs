@@ -25,7 +25,7 @@ namespace Tennis
             if (HasOnePlayerReachedAtLeastFourPoints() && IsScoreDifferenceAtLeastTwoPoints())
                 return Math.Sign(p1point - p2point) > 0 ? "Win for player1" : "Win for player2";
 
-            if (p1point > p2point && p2point >= 3 || p2point > p1point && p1point >= 3)
+            if (HasOnePlayerAdvantage())
                 return Math.Sign(p1point - p2point) > 0 ? "Advantage player1" : "Advantage player2";
 
             if (p1point == p2point)
@@ -83,6 +83,9 @@ namespace Tennis
 
             return score;
         }
+
+        private bool HasOnePlayerAdvantage()
+            => (p1point > p2point && p2point >= 3) || (p2point > p1point && p1point >= 3);
 
         private bool HasOnePlayerReachedAtLeastFourPoints()
             => p1point >= 4 || p2point >= 4;
