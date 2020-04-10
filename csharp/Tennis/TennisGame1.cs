@@ -2,7 +2,7 @@ using System;
 
 namespace Tennis
 {
-    struct CurrentScore
+    internal struct CurrentScore
     {
         public int playerOneScore;
         public int playerTwoScore;
