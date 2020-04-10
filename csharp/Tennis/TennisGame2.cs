@@ -85,11 +85,14 @@ namespace Tennis
                 score = "Advantage player2";
             }
 
-            if ((p1point >= 4 || p2point >= 4) && Math.Abs(p2point - p1point) >= 2)
+            if ((p1point >= 4 || p2point >= 4) && IsScoreDifferenceAtLeastTwoPoints())
                 return Math.Sign(p1point - p2point) > 0 ? "Win for player1" : "Win for player2";
-            
+
             return score;
         }
+
+        private bool IsScoreDifferenceAtLeastTwoPoints()
+            => Math.Abs(p2point - p1point) >= 2;
 
         private string GetStringRepresentationForSameScore(int currentScore)
             => currentScore > 2 ? "Deuce" : $"{ConvertScoreLessThanThreeToString(currentScore)}-All";
