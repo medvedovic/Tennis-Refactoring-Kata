@@ -13,8 +13,9 @@ namespace Tennis
         public TennisGame2(string player1Name, string player2Name)
         {
             this.player1Name = player1Name;
-            p1point = 0;
             this.player2Name = player2Name;
+            p1point = 0;
+            p2point = 0;
         }
 
         public string GetScore()
