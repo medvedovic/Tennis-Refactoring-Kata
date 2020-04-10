@@ -17,14 +17,13 @@ namespace Tennis
         public string GetScore()
         {
             string s;
+            if (IsCurrentScoreSame())
+                return p1 >= 3 ? "Deuce" : $"{indexedTextualScore[p1]}-All";
+
             if ((p1 < 4 && p2 < 4) && (p1 + p2 < 6))
-                return IsCurrentScoreSame()
-                    ? $"{indexedTextualScore[p1]}-All"
-                    : $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
+                return $"{indexedTextualScore[p1]}-{indexedTextualScore[p2]}";
             else
             {
-                if (IsCurrentScoreSame())
-                    return "Deuce";
                 s = p1 > p2 ? p1N : p2N;
                 return ((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
             }
